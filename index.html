@@ -6,27 +6,27 @@
   <title>北美英文读书会导读培训演练报名</title>
   <style>
     * { box-sizing: border-box; margin: 0; padding: 0; }
- 
+
     body {
       font-family: "Noto Sans SC", "Microsoft YaHei", sans-serif;
       background: #f4f6f9;
       color: #333;
       min-height: 100vh;
     }
- 
+
     header {
       background: #2c3e50;
       color: white;
       padding: 36px 24px 28px;
       text-align: center;
     }
- 
+
     header h1 {
       font-size: 2rem;
       margin-bottom: 14px;
       letter-spacing: 2px;
     }
- 
+
     .intro-box {
       background: rgba(255,255,255,0.12);
       border-left: 4px solid #f39c12;
@@ -38,14 +38,14 @@
       line-height: 1.8;
       white-space: pre-wrap;
     }
- 
+
     /* ── 首页：日期列表 ── */
     #view-index {
       max-width: 700px;
       margin: 40px auto;
       padding: 0 20px;
     }
- 
+
     .date-card {
       background: white;
       border-radius: 12px;
@@ -58,35 +58,35 @@
       justify-content: space-between;
       align-items: center;
     }
- 
+
     .date-card:hover {
       transform: translateY(-2px);
       box-shadow: 0 8px 24px rgba(0,0,0,0.12);
     }
- 
+
     .date-card-left h2 {
       font-size: 1.25rem;
       color: #2c3e50;
       margin-bottom: 6px;
     }
- 
+
     .date-card-left .date-tag {
       font-size: 0.9rem;
       color: #888;
     }
- 
+
     .date-card-right {
       font-size: 1.5rem;
       color: #bbb;
     }
- 
+
     .date-summary {
       display: flex;
       gap: 12px;
       margin-top: 10px;
       flex-wrap: wrap;
     }
- 
+
     .mini-badge {
       font-size: 0.8rem;
       padding: 3px 10px;
@@ -94,10 +94,10 @@
       background: #eef2f7;
       color: #555;
     }
- 
+
     /* ── 活动页 ── */
     #view-event { display: none; }
- 
+
     .back-btn {
       display: inline-flex;
       align-items: center;
@@ -112,9 +112,9 @@
       margin-bottom: 16px;
       transition: background 0.2s;
     }
- 
+
     .back-btn:hover { background: rgba(255,255,255,0.25); }
- 
+
     main {
       max-width: 900px;
       margin: 40px auto;
@@ -123,7 +123,7 @@
       grid-template-columns: repeat(auto-fit, minmax(380px, 1fr));
       gap: 28px;
     }
- 
+
     .project-card {
       background: white;
       border-radius: 12px;
@@ -132,18 +132,18 @@
       display: flex;
       flex-direction: column;
     }
- 
+
     .card-header {
       padding: 22px 24px 16px;
       border-bottom: 1px solid #eee;
     }
- 
+
     .card-header h2 {
       font-size: 1.3rem;
       color: #2c3e50;
       margin-bottom: 8px;
     }
- 
+
     .badge {
       display: inline-block;
       padding: 3px 12px;
@@ -151,34 +151,34 @@
       font-size: 0.82rem;
       font-weight: bold;
     }
- 
+
     .badge-limited { background: #fdebd0; color: #e67e22; }
     .badge-open    { background: #d5f5e3; color: #27ae60; }
- 
+
     .spots-bar { padding: 14px 24px 6px; }
- 
+
     .spots-label {
       font-size: 0.9rem;
       color: #666;
       margin-bottom: 6px;
     }
- 
+
     .progress-track {
       background: #eee;
       border-radius: 20px;
       height: 10px;
       overflow: hidden;
     }
- 
+
     .progress-fill {
       height: 100%;
       border-radius: 20px;
       background: #e67e22;
       transition: width 0.4s ease;
     }
- 
+
     .registrants-section { padding: 12px 24px 0; }
- 
+
     .registrants-section h3 {
       font-size: 0.9rem;
       color: #888;
@@ -186,13 +186,13 @@
       text-transform: uppercase;
       letter-spacing: 1px;
     }
- 
+
     .registrants-list {
       list-style: none;
       max-height: 180px;
       overflow-y: auto;
     }
- 
+
     .registrants-list li {
       padding: 5px 0;
       font-size: 0.95rem;
@@ -201,9 +201,9 @@
       justify-content: space-between;
       align-items: center;
     }
- 
+
     .registrants-list li:last-child { border-bottom: none; }
- 
+
     .remove-btn {
       background: none;
       border: none;
@@ -213,21 +213,21 @@
       padding: 0 4px;
       transition: color 0.2s;
     }
- 
+
     .remove-btn:hover { color: #e74c3c; }
- 
+
     .empty-hint {
       font-size: 0.88rem;
       color: #bbb;
       padding: 6px 0 8px;
       font-style: italic;
     }
- 
+
     .form-area {
       padding: 16px 24px 24px;
       margin-top: auto;
     }
- 
+
     .form-area input {
       width: 100%;
       padding: 10px 14px;
@@ -238,9 +238,9 @@
       outline: none;
       transition: border-color 0.2s;
     }
- 
+
     .form-area input:focus { border-color: #2c3e50; }
- 
+
     .form-area button {
       width: 100%;
       padding: 11px;
@@ -252,55 +252,62 @@
       cursor: pointer;
       transition: background 0.2s;
     }
- 
+
     .form-area button:hover { background: #1a252f; }
     .form-area button:disabled { background: #bbb; cursor: not-allowed; }
- 
+
     .msg {
       font-size: 0.88rem;
       margin-top: 8px;
       min-height: 18px;
       color: #e74c3c;
     }
- 
+
     .msg.success { color: #27ae60; }
- 
+
     footer {
       text-align: center;
       padding: 24px;
       font-size: 0.85rem;
       color: #aaa;
     }
+
+    .loading-overlay {
+      position: fixed; inset: 0;
+      background: rgba(255,255,255,0.7);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.1rem; color: #555;
+      z-index: 999;
+    }
   </style>
 </head>
 <body>
- 
+
 <header id="site-header">
-  <!--
-    ★ 北美英文读书会导读培训演练报名
-  -->
-  <h1>【北美英文读书会导读培训演练报名】</h1>
-  <div class="intro-box">北美英文读书会导读培训演练报名
-请选择合适的时间，每场培训演练限4人，观摩（扮演书友）无上限</div>
+  <h1>北美英文读书会导读培训演练报名</h1>
+  <div class="intro-box">请使用此链接报名参加英文读书会导读培训演练
+每场导读演练限4人，观摩人数无上限</div>
 </header>
- 
+
 <!-- 首页：日期列表 -->
 <div id="view-index"></div>
- 
+
 <!-- 活动详情页 -->
 <div id="view-event">
   <main id="projects-container"></main>
 </div>
- 
-/*<footer>
-</footer>*/
- 
+
+<footer>
+  报名数据实时保存至云端数据库。
+</footer>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <script>
-  // =============================================
-  // ★ 在此配置所有日期的活动
-  //   每个日期下有两个报名项目
-  //   max: null 表示无人数上限
-  // =============================================
+  const SUPABASE_URL = "https://olwcgjtkjmrxwanwrnsc.supabase.co";
+  const SUPABASE_KEY = "sb_publishable_Gy2j8w_5N5x_2EAf1rcIxQ_ILJ1EScu";
+  const sb = supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
+</script>
+<script>
   const EVENTS = [
     {
       id: "event-20260307",
@@ -323,74 +330,103 @@
       ]
     }
   ];
- 
-  // =============================================
-  // 核心逻辑（无需修改）
-  // =============================================
- 
+
   let currentEvent = null;
- 
-  function loadData(id) {
-    try { return JSON.parse(localStorage.getItem(id)) || []; }
-    catch { return []; }
+
+  function showLoading(on) {
+    let el = document.getElementById("loading-overlay");
+    if (on) {
+      if (!el) {
+        el = document.createElement("div");
+        el.id = "loading-overlay";
+        el.className = "loading-overlay";
+        el.textContent = "加载中…";
+        document.body.appendChild(el);
+      }
+    } else {
+      if (el) el.remove();
+    }
   }
- 
-  function saveData(id, list) {
-    localStorage.setItem(id, JSON.stringify(list));
+
+  async function fetchList(projectId) {
+    const { data, error } = await sb
+      .from("registrations")
+      .select("id, name")
+      .eq("project_id", projectId)
+      .order("created_at", { ascending: true });
+    if (error) { console.error(error); return []; }
+    return data;
   }
- 
+
+  async function addRegistration(projectId, name) {
+    const { data, error } = await sb
+      .from("registrations")
+      .insert({ project_id: projectId, name })
+      .select("id, name")
+      .single();
+    if (error) throw error;
+    return data;
+  }
+
+  async function deleteRegistration(rowId) {
+    const { error } = await sb
+      .from("registrations")
+      .delete()
+      .eq("id", rowId);
+    if (error) throw error;
+  }
+
   function escapeHtml(str) {
     return str.replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;").replace(/"/g,"&quot;");
   }
- 
-  // ── 首页渲染 ──
-  function renderIndex() {
+
+  async function renderIndex() {
+    showLoading(true);
     currentEvent = null;
     document.getElementById("view-index").style.display = "";
     document.getElementById("view-event").style.display = "none";
- 
-    // 恢复 header
+
     const header = document.getElementById("site-header");
     header.innerHTML = `
       <h1>北美英文读书会导读培训演练报名</h1>
       <div class="intro-box">请使用此链接报名参加英文读书会导读培训演练
-      每场导读演练限4人，观摩人数无上限</div>
+每场导读演练限4人，观摩人数无上限</div>
     `;
- 
+
     const container = document.getElementById("view-index");
     container.innerHTML = "";
- 
-    EVENTS.forEach(ev => {
+
+    for (const ev of EVENTS) {
       const card = document.createElement("div");
       card.className = "date-card";
- 
-      // 统计各项目人数
-      const summaryBadges = ev.projects.map(p => {
-        const count = loadData(p.id).length;
+
+      const badges = await Promise.all(ev.projects.map(async p => {
+        const list = await fetchList(p.id);
         const maxTxt = p.max !== null ? `/ ${p.max}` : "";
-        return `<span class="mini-badge">${p.name}：${count}${maxTxt} 人</span>`;
-      }).join("");
- 
+        return `<span class="mini-badge">${p.name}：${list.length}${maxTxt} 人</span>`;
+      }));
+
       card.innerHTML = `
         <div class="date-card-left">
           <h2>${ev.title}</h2>
           <div class="date-tag">${ev.date}</div>
-          <div class="date-summary">${summaryBadges}</div>
+          <div class="date-summary">${badges.join("")}</div>
         </div>
         <div class="date-card-right">›</div>
       `;
- 
+
       card.addEventListener("click", () => renderEvent(ev));
       container.appendChild(card);
-    });
+    }
+    showLoading(false);
   }
- 
-  // ── 活动页渲染 ──
-  function renderEvent(ev) {
+
+  async function renderEvent(ev) {
+    showLoading(true);
     currentEvent = ev;
     document.getElementById("view-index").style.display = "none";
     document.getElementById("view-event").style.display = "";
- 
+
     const header = document.getElementById("site-header");
     header.innerHTML = `
       <button class="back-btn" id="back-btn">← 返回列表</button>
@@ -398,24 +434,25 @@
       ${ev.description ? `<div class="intro-box">${escapeHtml(ev.description)}</div>` : ""}
     `;
     document.getElementById("back-btn").addEventListener("click", renderIndex);
- 
+
     const container = document.getElementById("projects-container");
     container.innerHTML = "";
-    ev.projects.forEach(project => {
-      container.appendChild(renderCard(project));
+    for (const project of ev.projects) {
+      const list = await fetchList(project.id);
+      container.appendChild(renderCard(project, list));
       bindCardEvents(project);
-    });
+    }
+    showLoading(false);
   }
- 
-  function renderCard(project) {
-    const list = loadData(project.id);
+
+  function renderCard(project, list) {
     const isLimited = project.max !== null;
     const full = isLimited && list.length >= project.max;
- 
+
     const card = document.createElement("div");
     card.className = "project-card";
     card.id = "card-" + project.id;
- 
+
     const cardHeader = document.createElement("div");
     cardHeader.className = "card-header";
     cardHeader.innerHTML = `
@@ -425,7 +462,7 @@
         : `<span class="badge badge-open">开放报名・无上限</span>`}
     `;
     card.appendChild(cardHeader);
- 
+
     const spotsBar = document.createElement("div");
     spotsBar.className = "spots-bar";
     if (isLimited) {
@@ -438,28 +475,28 @@
       spotsBar.innerHTML = `<div class="spots-label">已报名 <strong>${list.length}</strong> 人</div>`;
     }
     card.appendChild(spotsBar);
- 
+
     const section = document.createElement("div");
     section.className = "registrants-section";
     section.innerHTML = `<h3>报名名单</h3>`;
- 
+
     const ul = document.createElement("ul");
     ul.className = "registrants-list";
     if (list.length === 0) {
       ul.innerHTML = `<li class="empty-hint">暂无人报名</li>`;
     } else {
-      list.forEach((name, idx) => {
+      list.forEach((row, idx) => {
         const li = document.createElement("li");
         li.innerHTML = `
-          <span>${idx + 1}. ${escapeHtml(name)}</span>
-          <button class="remove-btn" title="移除" data-idx="${idx}" data-pid="${project.id}">✕</button>
+          <span>${idx + 1}. ${escapeHtml(row.name)}</span>
+          <button class="remove-btn" title="移除" data-rowid="${row.id}" data-pid="${project.id}">✕</button>
         `;
         ul.appendChild(li);
       });
     }
     section.appendChild(ul);
     card.appendChild(section);
- 
+
     const formArea = document.createElement("div");
     formArea.className = "form-area";
     formArea.innerHTML = `
@@ -468,57 +505,68 @@
       <div class="msg" id="msg-${project.id}"></div>
     `;
     card.appendChild(formArea);
- 
+
     return card;
   }
- 
-  function refreshCard(project) {
+
+  async function refreshCard(project) {
+    const list = await fetchList(project.id);
     const container = document.getElementById("projects-container");
     const old = document.getElementById("card-" + project.id);
-    const newCard = renderCard(project);
+    const newCard = renderCard(project, list);
     container.replaceChild(newCard, old);
     bindCardEvents(project);
   }
- 
+
   function bindCardEvents(project) {
     const btn   = document.getElementById("btn-"   + project.id);
     const input = document.getElementById("input-" + project.id);
     const msg   = document.getElementById("msg-"   + project.id);
- 
+
     if (!btn) return;
- 
-    btn.addEventListener("click", () => {
+
+    btn.addEventListener("click", async () => {
       const name = input.value.trim();
       if (!name) { msg.className = "msg"; msg.textContent = "请输入姓名"; return; }
-      const list = loadData(project.id);
+
+      btn.disabled = true;
+      msg.className = "msg"; msg.textContent = "";
+
+      const list = await fetchList(project.id);
       if (project.max !== null && list.length >= project.max) {
-        msg.className = "msg"; msg.textContent = "名额已满，无法报名"; return;
+        msg.textContent = "名额已满，无法报名"; btn.disabled = false; return;
       }
-      if (list.includes(name)) {
-        msg.className = "msg"; msg.textContent = "此姓名已报名过了"; return;
+      if (list.some(r => r.name === name)) {
+        msg.textContent = "此姓名已报名过了"; btn.disabled = false; return;
       }
-      list.push(name);
-      saveData(project.id, list);
-      refreshCard(project);
-      const newMsg = document.getElementById("msg-" + project.id);
-      if (newMsg) { newMsg.className = "msg success"; newMsg.textContent = "报名成功！"; }
+
+      try {
+        await addRegistration(project.id, name);
+        await refreshCard(project);
+        const newMsg = document.getElementById("msg-" + project.id);
+        if (newMsg) { newMsg.className = "msg success"; newMsg.textContent = "报名成功！"; }
+      } catch(e) {
+        msg.textContent = "提交失败，请重试"; btn.disabled = false;
+      }
     });
- 
+
     input.addEventListener("keydown", e => { if (e.key === "Enter") btn.click(); });
- 
+
     document.querySelectorAll(`[data-pid="${project.id}"]`).forEach(removeBtn => {
-      removeBtn.addEventListener("click", () => {
-        const idx = parseInt(removeBtn.dataset.idx);
-        const list = loadData(project.id);
-        list.splice(idx, 1);
-        saveData(project.id, list);
-        refreshCard(project);
+      removeBtn.addEventListener("click", async () => {
+        const rowId = removeBtn.dataset.rowid;
+        try {
+          await deleteRegistration(rowId);
+          await refreshCard(project);
+        } catch(e) {
+          alert("删除失败，请重试");
+        }
       });
     });
   }
- 
+
   renderIndex();
 </script>
- 
+
 </body>
 </html>
