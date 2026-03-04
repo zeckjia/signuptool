@@ -1,14 +1,14 @@
 <!DOCTYPE html>
-<html lang="zh-TW">
+<html lang="zh-CN">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>活動報名</title>
+  <title>活动报名</title>
   <style>
     * { box-sizing: border-box; margin: 0; padding: 0; }
  
     body {
-      font-family: "Noto Sans TC", "Microsoft JhengHei", sans-serif;
+      font-family: "Noto Sans SC", "Microsoft YaHei", sans-serif;
       background: #f4f6f9;
       color: #333;
       min-height: 100vh;
@@ -17,13 +17,13 @@
     header {
       background: #2c3e50;
       color: white;
-      padding: 40px 24px 32px;
+      padding: 36px 24px 28px;
       text-align: center;
     }
  
     header h1 {
       font-size: 2rem;
-      margin-bottom: 16px;
+      margin-bottom: 14px;
       letter-spacing: 2px;
     }
  
@@ -31,13 +31,89 @@
       background: rgba(255,255,255,0.12);
       border-left: 4px solid #f39c12;
       border-radius: 6px;
-      padding: 18px 22px;
+      padding: 16px 20px;
       max-width: 720px;
       margin: 0 auto;
       text-align: left;
       line-height: 1.8;
       white-space: pre-wrap;
     }
+ 
+    /* ── 首页：日期列表 ── */
+    #view-index {
+      max-width: 700px;
+      margin: 40px auto;
+      padding: 0 20px;
+    }
+ 
+    .date-card {
+      background: white;
+      border-radius: 12px;
+      box-shadow: 0 4px 16px rgba(0,0,0,0.08);
+      padding: 24px 28px;
+      margin-bottom: 20px;
+      cursor: pointer;
+      transition: transform 0.15s, box-shadow 0.15s;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+ 
+    .date-card:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 24px rgba(0,0,0,0.12);
+    }
+ 
+    .date-card-left h2 {
+      font-size: 1.25rem;
+      color: #2c3e50;
+      margin-bottom: 6px;
+    }
+ 
+    .date-card-left .date-tag {
+      font-size: 0.9rem;
+      color: #888;
+    }
+ 
+    .date-card-right {
+      font-size: 1.5rem;
+      color: #bbb;
+    }
+ 
+    .date-summary {
+      display: flex;
+      gap: 12px;
+      margin-top: 10px;
+      flex-wrap: wrap;
+    }
+ 
+    .mini-badge {
+      font-size: 0.8rem;
+      padding: 3px 10px;
+      border-radius: 20px;
+      background: #eef2f7;
+      color: #555;
+    }
+ 
+    /* ── 活动页 ── */
+    #view-event { display: none; }
+ 
+    .back-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: rgba(255,255,255,0.15);
+      border: 1px solid rgba(255,255,255,0.3);
+      color: white;
+      padding: 8px 16px;
+      border-radius: 8px;
+      cursor: pointer;
+      font-size: 0.9rem;
+      margin-bottom: 16px;
+      transition: background 0.2s;
+    }
+ 
+    .back-btn:hover { background: rgba(255,255,255,0.25); }
  
     main {
       max-width: 900px;
@@ -76,19 +152,10 @@
       font-weight: bold;
     }
  
-    .badge-limited {
-      background: #fdebd0;
-      color: #e67e22;
-    }
+    .badge-limited { background: #fdebd0; color: #e67e22; }
+    .badge-open    { background: #d5f5e3; color: #27ae60; }
  
-    .badge-open {
-      background: #d5f5e3;
-      color: #27ae60;
-    }
- 
-    .spots-bar {
-      padding: 14px 24px 6px;
-    }
+    .spots-bar { padding: 14px 24px 6px; }
  
     .spots-label {
       font-size: 0.9rem;
@@ -110,9 +177,7 @@
       transition: width 0.4s ease;
     }
  
-    .registrants-section {
-      padding: 12px 24px 0;
-    }
+    .registrants-section { padding: 12px 24px 0; }
  
     .registrants-section h3 {
       font-size: 0.9rem;
@@ -189,10 +254,7 @@
     }
  
     .form-area button:hover { background: #1a252f; }
-    .form-area button:disabled {
-      background: #bbb;
-      cursor: not-allowed;
-    }
+    .form-area button:disabled { background: #bbb; cursor: not-allowed; }
  
     .msg {
       font-size: 0.88rem;
@@ -213,57 +275,147 @@
 </head>
 <body>
  
-<header>
+<header id="site-header">
   <!--
-    ★ 在這裡修改活動標題（h1 標籤內）
-    ★ 以及下方說明文字（intro-box div 內）
+    ★ 在此修改网站标题和说明
   -->
-  <h1>【請填寫活動名稱】</h1>
-  <div class="intro-box">請在這裡填寫活動說明。
-可以說明報名方式、注意事項、活動時間地點等資訊。
-支援換行，直接在此處編輯即可。</div>
+  <h1>【填写活动总名称】</h1>
+  <div class="intro-box">在此填写活动总说明，可以换行。
+支持多行文字，直接在此处编辑即可。</div>
 </header>
  
-<main id="projects-container">
-  <!-- 卡片由 JS 產生 -->
-</main>
+<!-- 首页：日期列表 -->
+<div id="view-index"></div>
+ 
+<!-- 活动详情页 -->
+<div id="view-event">
+  <main id="projects-container"></main>
+</div>
  
 <footer>
-  報名資料儲存於您的瀏覽器，重新整理後仍會保留。
+  报名数据保存在您的浏览器中，刷新后仍会保留。
 </footer>
  
 <script>
   // =============================================
-  // ★ 在這裡修改兩個項目的名稱與上限人數
-  // max: null 代表無上限
+  // ★ 在此配置所有日期的活动
+  //   每个日期下有两个报名项目
+  //   max: null 表示无人数上限
   // =============================================
-  const PROJECTS = [
+  const EVENTS = [
     {
-      id: "project1",
-      name: "【請填寫項目一名稱】",
-      max: 4
+      id: "event-20260315",
+      date: "2026年3月15日",
+      title: "第一场活动名称",
+      description: "本次活动说明，可以留空。",
+      projects: [
+        { id: "event-20260315-p1", name: "项目一名称", max: 4 },
+        { id: "event-20260315-p2", name: "项目二名称", max: null }
+      ]
     },
     {
-      id: "project2",
-      name: "【請填寫項目二名稱】",
-      max: null
+      id: "event-20260322",
+      date: "2026年3月22日",
+      title: "第二场活动名称",
+      description: "",
+      projects: [
+        { id: "event-20260322-p1", name: "项目一名称", max: 6 },
+        { id: "event-20260322-p2", name: "项目二名称", max: null }
+      ]
+    },
+    {
+      id: "event-20260329",
+      date: "2026年3月29日",
+      title: "第三场活动名称",
+      description: "",
+      projects: [
+        { id: "event-20260329-p1", name: "项目一名称", max: 4 },
+        { id: "event-20260329-p2", name: "项目二名称", max: null }
+      ]
     }
   ];
  
   // =============================================
-  // 核心邏輯（不需修改）
+  // 核心逻辑（无需修改）
   // =============================================
  
+  let currentEvent = null;
+ 
   function loadData(id) {
-    try {
-      return JSON.parse(localStorage.getItem(id)) || [];
-    } catch {
-      return [];
-    }
+    try { return JSON.parse(localStorage.getItem(id)) || []; }
+    catch { return []; }
   }
  
   function saveData(id, list) {
     localStorage.setItem(id, JSON.stringify(list));
+  }
+ 
+  function escapeHtml(str) {
+    return str.replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;").replace(/"/g,"&quot;");
+  }
+ 
+  // ── 首页渲染 ──
+  function renderIndex() {
+    currentEvent = null;
+    document.getElementById("view-index").style.display = "";
+    document.getElementById("view-event").style.display = "none";
+ 
+    // 恢复 header
+    const header = document.getElementById("site-header");
+    header.innerHTML = `
+      <h1>【填写活动总名称】</h1>
+      <div class="intro-box">在此填写活动总说明，可以换行。
+支持多行文字，直接在此处编辑即可。</div>
+    `;
+ 
+    const container = document.getElementById("view-index");
+    container.innerHTML = "";
+ 
+    EVENTS.forEach(ev => {
+      const card = document.createElement("div");
+      card.className = "date-card";
+ 
+      // 统计各项目人数
+      const summaryBadges = ev.projects.map(p => {
+        const count = loadData(p.id).length;
+        const maxTxt = p.max !== null ? `/ ${p.max}` : "";
+        return `<span class="mini-badge">${p.name}：${count}${maxTxt} 人</span>`;
+      }).join("");
+ 
+      card.innerHTML = `
+        <div class="date-card-left">
+          <h2>${ev.title}</h2>
+          <div class="date-tag">${ev.date}</div>
+          <div class="date-summary">${summaryBadges}</div>
+        </div>
+        <div class="date-card-right">›</div>
+      `;
+ 
+      card.addEventListener("click", () => renderEvent(ev));
+      container.appendChild(card);
+    });
+  }
+ 
+  // ── 活动页渲染 ──
+  function renderEvent(ev) {
+    currentEvent = ev;
+    document.getElementById("view-index").style.display = "none";
+    document.getElementById("view-event").style.display = "";
+ 
+    const header = document.getElementById("site-header");
+    header.innerHTML = `
+      <button class="back-btn" id="back-btn">← 返回列表</button>
+      <h1>${ev.title}</h1>
+      ${ev.description ? `<div class="intro-box">${escapeHtml(ev.description)}</div>` : ""}
+    `;
+    document.getElementById("back-btn").addEventListener("click", renderIndex);
+ 
+    const container = document.getElementById("projects-container");
+    container.innerHTML = "";
+    ev.projects.forEach(project => {
+      container.appendChild(renderCard(project));
+      bindCardEvents(project);
+    });
   }
  
   function renderCard(project) {
@@ -275,47 +427,37 @@
     card.className = "project-card";
     card.id = "card-" + project.id;
  
-    // 頂部
     const cardHeader = document.createElement("div");
     cardHeader.className = "card-header";
     cardHeader.innerHTML = `
       <h2>${project.name}</h2>
       ${isLimited
-        ? `<span class="badge badge-limited">限額 ${project.max} 人</span>`
-        : `<span class="badge badge-open">開放報名・無上限</span>`
-      }
+        ? `<span class="badge badge-limited">限额 ${project.max} 人</span>`
+        : `<span class="badge badge-open">开放报名・无上限</span>`}
     `;
     card.appendChild(cardHeader);
  
-    // 進度條（僅限額項目顯示）
+    const spotsBar = document.createElement("div");
+    spotsBar.className = "spots-bar";
     if (isLimited) {
-      const spotsBar = document.createElement("div");
-      spotsBar.className = "spots-bar";
       const pct = Math.min((list.length / project.max) * 100, 100);
       spotsBar.innerHTML = `
-        <div class="spots-label">已報名 <strong>${list.length}</strong> / ${project.max} 人</div>
-        <div class="progress-track">
-          <div class="progress-fill" style="width:${pct}%"></div>
-        </div>
+        <div class="spots-label">已报名 <strong>${list.length}</strong> / ${project.max} 人</div>
+        <div class="progress-track"><div class="progress-fill" style="width:${pct}%"></div></div>
       `;
-      card.appendChild(spotsBar);
     } else {
-      const spotsBar = document.createElement("div");
-      spotsBar.className = "spots-bar";
-      spotsBar.innerHTML = `<div class="spots-label">已報名 <strong>${list.length}</strong> 人</div>`;
-      card.appendChild(spotsBar);
+      spotsBar.innerHTML = `<div class="spots-label">已报名 <strong>${list.length}</strong> 人</div>`;
     }
+    card.appendChild(spotsBar);
  
-    // 報名名單
     const section = document.createElement("div");
     section.className = "registrants-section";
-    section.innerHTML = `<h3>報名名單</h3>`;
+    section.innerHTML = `<h3>报名名单</h3>`;
  
     const ul = document.createElement("ul");
     ul.className = "registrants-list";
- 
     if (list.length === 0) {
-      ul.innerHTML = `<li class="empty-hint">尚無人報名</li>`;
+      ul.innerHTML = `<li class="empty-hint">暂无人报名</li>`;
     } else {
       list.forEach((name, idx) => {
         const li = document.createElement("li");
@@ -326,27 +468,19 @@
         ul.appendChild(li);
       });
     }
- 
     section.appendChild(ul);
     card.appendChild(section);
  
-    // 表單
     const formArea = document.createElement("div");
     formArea.className = "form-area";
     formArea.innerHTML = `
-      <input type="text" placeholder="輸入您的姓名" id="input-${project.id}" maxlength="30" ${full ? "disabled" : ""} />
-      <button id="btn-${project.id}" ${full ? "disabled" : ""}>
-        ${full ? "名額已滿" : "確認報名"}
-      </button>
+      <input type="text" placeholder="输入您的姓名" id="input-${project.id}" maxlength="30" ${full ? "disabled" : ""} />
+      <button id="btn-${project.id}" ${full ? "disabled" : ""}>${full ? "名额已满" : "确认报名"}</button>
       <div class="msg" id="msg-${project.id}"></div>
     `;
     card.appendChild(formArea);
  
     return card;
-  }
- 
-  function escapeHtml(str) {
-    return str.replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;").replace(/"/g,"&quot;");
   }
  
   function refreshCard(project) {
@@ -358,45 +492,31 @@
   }
  
   function bindCardEvents(project) {
-    const btn = document.getElementById("btn-" + project.id);
+    const btn   = document.getElementById("btn-"   + project.id);
     const input = document.getElementById("input-" + project.id);
-    const msg = document.getElementById("msg-" + project.id);
+    const msg   = document.getElementById("msg-"   + project.id);
  
-    if (btn) {
-      btn.addEventListener("click", () => {
-        const name = input.value.trim();
-        if (!name) {
-          msg.className = "msg";
-          msg.textContent = "請輸入姓名";
-          return;
-        }
-        const list = loadData(project.id);
-        if (project.max !== null && list.length >= project.max) {
-          msg.className = "msg";
-          msg.textContent = "名額已滿，無法報名";
-          return;
-        }
-        if (list.includes(name)) {
-          msg.className = "msg";
-          msg.textContent = "此姓名已報名過了";
-          return;
-        }
-        list.push(name);
-        saveData(project.id, list);
-        refreshCard(project);
-        const newMsg = document.getElementById("msg-" + project.id);
-        if (newMsg) {
-          newMsg.className = "msg success";
-          newMsg.textContent = "報名成功！";
-        }
-      });
+    if (!btn) return;
  
-      input && input.addEventListener("keydown", e => {
-        if (e.key === "Enter") btn.click();
-      });
-    }
+    btn.addEventListener("click", () => {
+      const name = input.value.trim();
+      if (!name) { msg.className = "msg"; msg.textContent = "请输入姓名"; return; }
+      const list = loadData(project.id);
+      if (project.max !== null && list.length >= project.max) {
+        msg.className = "msg"; msg.textContent = "名额已满，无法报名"; return;
+      }
+      if (list.includes(name)) {
+        msg.className = "msg"; msg.textContent = "此姓名已报名过了"; return;
+      }
+      list.push(name);
+      saveData(project.id, list);
+      refreshCard(project);
+      const newMsg = document.getElementById("msg-" + project.id);
+      if (newMsg) { newMsg.className = "msg success"; newMsg.textContent = "报名成功！"; }
+    });
  
-    // 移除按鈕
+    input.addEventListener("keydown", e => { if (e.key === "Enter") btn.click(); });
+ 
     document.querySelectorAll(`[data-pid="${project.id}"]`).forEach(removeBtn => {
       removeBtn.addEventListener("click", () => {
         const idx = parseInt(removeBtn.dataset.idx);
@@ -408,15 +528,7 @@
     });
   }
  
-  function init() {
-    const container = document.getElementById("projects-container");
-    PROJECTS.forEach(project => {
-      container.appendChild(renderCard(project));
-      bindCardEvents(project);
-    });
-  }
- 
-  init();
+  renderIndex();
 </script>
  
 </body>
