@@ -1,0 +1,423 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>活動報名</title>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+ 
+    body {
+      font-family: "Noto Sans TC", "Microsoft JhengHei", sans-serif;
+      background: #f4f6f9;
+      color: #333;
+      min-height: 100vh;
+    }
+ 
+    header {
+      background: #2c3e50;
+      color: white;
+      padding: 40px 24px 32px;
+      text-align: center;
+    }
+ 
+    header h1 {
+      font-size: 2rem;
+      margin-bottom: 16px;
+      letter-spacing: 2px;
+    }
+ 
+    .intro-box {
+      background: rgba(255,255,255,0.12);
+      border-left: 4px solid #f39c12;
+      border-radius: 6px;
+      padding: 18px 22px;
+      max-width: 720px;
+      margin: 0 auto;
+      text-align: left;
+      line-height: 1.8;
+      white-space: pre-wrap;
+    }
+ 
+    main {
+      max-width: 900px;
+      margin: 40px auto;
+      padding: 0 20px;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(380px, 1fr));
+      gap: 28px;
+    }
+ 
+    .project-card {
+      background: white;
+      border-radius: 12px;
+      box-shadow: 0 4px 16px rgba(0,0,0,0.08);
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+    }
+ 
+    .card-header {
+      padding: 22px 24px 16px;
+      border-bottom: 1px solid #eee;
+    }
+ 
+    .card-header h2 {
+      font-size: 1.3rem;
+      color: #2c3e50;
+      margin-bottom: 8px;
+    }
+ 
+    .badge {
+      display: inline-block;
+      padding: 3px 12px;
+      border-radius: 20px;
+      font-size: 0.82rem;
+      font-weight: bold;
+    }
+ 
+    .badge-limited {
+      background: #fdebd0;
+      color: #e67e22;
+    }
+ 
+    .badge-open {
+      background: #d5f5e3;
+      color: #27ae60;
+    }
+ 
+    .spots-bar {
+      padding: 14px 24px 6px;
+    }
+ 
+    .spots-label {
+      font-size: 0.9rem;
+      color: #666;
+      margin-bottom: 6px;
+    }
+ 
+    .progress-track {
+      background: #eee;
+      border-radius: 20px;
+      height: 10px;
+      overflow: hidden;
+    }
+ 
+    .progress-fill {
+      height: 100%;
+      border-radius: 20px;
+      background: #e67e22;
+      transition: width 0.4s ease;
+    }
+ 
+    .registrants-section {
+      padding: 12px 24px 0;
+    }
+ 
+    .registrants-section h3 {
+      font-size: 0.9rem;
+      color: #888;
+      margin-bottom: 8px;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+ 
+    .registrants-list {
+      list-style: none;
+      max-height: 180px;
+      overflow-y: auto;
+    }
+ 
+    .registrants-list li {
+      padding: 5px 0;
+      font-size: 0.95rem;
+      border-bottom: 1px dashed #f0f0f0;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+ 
+    .registrants-list li:last-child { border-bottom: none; }
+ 
+    .remove-btn {
+      background: none;
+      border: none;
+      color: #ccc;
+      cursor: pointer;
+      font-size: 1rem;
+      padding: 0 4px;
+      transition: color 0.2s;
+    }
+ 
+    .remove-btn:hover { color: #e74c3c; }
+ 
+    .empty-hint {
+      font-size: 0.88rem;
+      color: #bbb;
+      padding: 6px 0 8px;
+      font-style: italic;
+    }
+ 
+    .form-area {
+      padding: 16px 24px 24px;
+      margin-top: auto;
+    }
+ 
+    .form-area input {
+      width: 100%;
+      padding: 10px 14px;
+      border: 1px solid #ddd;
+      border-radius: 8px;
+      font-size: 1rem;
+      margin-bottom: 10px;
+      outline: none;
+      transition: border-color 0.2s;
+    }
+ 
+    .form-area input:focus { border-color: #2c3e50; }
+ 
+    .form-area button {
+      width: 100%;
+      padding: 11px;
+      background: #2c3e50;
+      color: white;
+      border: none;
+      border-radius: 8px;
+      font-size: 1rem;
+      cursor: pointer;
+      transition: background 0.2s;
+    }
+ 
+    .form-area button:hover { background: #1a252f; }
+    .form-area button:disabled {
+      background: #bbb;
+      cursor: not-allowed;
+    }
+ 
+    .msg {
+      font-size: 0.88rem;
+      margin-top: 8px;
+      min-height: 18px;
+      color: #e74c3c;
+    }
+ 
+    .msg.success { color: #27ae60; }
+ 
+    footer {
+      text-align: center;
+      padding: 24px;
+      font-size: 0.85rem;
+      color: #aaa;
+    }
+  </style>
+</head>
+<body>
+ 
+<header>
+  <!--
+    ★ 在這裡修改活動標題（h1 標籤內）
+    ★ 以及下方說明文字（intro-box div 內）
+  -->
+  <h1>【請填寫活動名稱】</h1>
+  <div class="intro-box">請在這裡填寫活動說明。
+可以說明報名方式、注意事項、活動時間地點等資訊。
+支援換行，直接在此處編輯即可。</div>
+</header>
+ 
+<main id="projects-container">
+  <!-- 卡片由 JS 產生 -->
+</main>
+ 
+<footer>
+  報名資料儲存於您的瀏覽器，重新整理後仍會保留。
+</footer>
+ 
+<script>
+  // =============================================
+  // ★ 在這裡修改兩個項目的名稱與上限人數
+  // max: null 代表無上限
+  // =============================================
+  const PROJECTS = [
+    {
+      id: "project1",
+      name: "【請填寫項目一名稱】",
+      max: 4
+    },
+    {
+      id: "project2",
+      name: "【請填寫項目二名稱】",
+      max: null
+    }
+  ];
+ 
+  // =============================================
+  // 核心邏輯（不需修改）
+  // =============================================
+ 
+  function loadData(id) {
+    try {
+      return JSON.parse(localStorage.getItem(id)) || [];
+    } catch {
+      return [];
+    }
+  }
+ 
+  function saveData(id, list) {
+    localStorage.setItem(id, JSON.stringify(list));
+  }
+ 
+  function renderCard(project) {
+    const list = loadData(project.id);
+    const isLimited = project.max !== null;
+    const full = isLimited && list.length >= project.max;
+ 
+    const card = document.createElement("div");
+    card.className = "project-card";
+    card.id = "card-" + project.id;
+ 
+    // 頂部
+    const cardHeader = document.createElement("div");
+    cardHeader.className = "card-header";
+    cardHeader.innerHTML = `
+      <h2>${project.name}</h2>
+      ${isLimited
+        ? `<span class="badge badge-limited">限額 ${project.max} 人</span>`
+        : `<span class="badge badge-open">開放報名・無上限</span>`
+      }
+    `;
+    card.appendChild(cardHeader);
+ 
+    // 進度條（僅限額項目顯示）
+    if (isLimited) {
+      const spotsBar = document.createElement("div");
+      spotsBar.className = "spots-bar";
+      const pct = Math.min((list.length / project.max) * 100, 100);
+      spotsBar.innerHTML = `
+        <div class="spots-label">已報名 <strong>${list.length}</strong> / ${project.max} 人</div>
+        <div class="progress-track">
+          <div class="progress-fill" style="width:${pct}%"></div>
+        </div>
+      `;
+      card.appendChild(spotsBar);
+    } else {
+      const spotsBar = document.createElement("div");
+      spotsBar.className = "spots-bar";
+      spotsBar.innerHTML = `<div class="spots-label">已報名 <strong>${list.length}</strong> 人</div>`;
+      card.appendChild(spotsBar);
+    }
+ 
+    // 報名名單
+    const section = document.createElement("div");
+    section.className = "registrants-section";
+    section.innerHTML = `<h3>報名名單</h3>`;
+ 
+    const ul = document.createElement("ul");
+    ul.className = "registrants-list";
+ 
+    if (list.length === 0) {
+      ul.innerHTML = `<li class="empty-hint">尚無人報名</li>`;
+    } else {
+      list.forEach((name, idx) => {
+        const li = document.createElement("li");
+        li.innerHTML = `
+          <span>${idx + 1}. ${escapeHtml(name)}</span>
+          <button class="remove-btn" title="移除" data-idx="${idx}" data-pid="${project.id}">✕</button>
+        `;
+        ul.appendChild(li);
+      });
+    }
+ 
+    section.appendChild(ul);
+    card.appendChild(section);
+ 
+    // 表單
+    const formArea = document.createElement("div");
+    formArea.className = "form-area";
+    formArea.innerHTML = `
+      <input type="text" placeholder="輸入您的姓名" id="input-${project.id}" maxlength="30" ${full ? "disabled" : ""} />
+      <button id="btn-${project.id}" ${full ? "disabled" : ""}>
+        ${full ? "名額已滿" : "確認報名"}
+      </button>
+      <div class="msg" id="msg-${project.id}"></div>
+    `;
+    card.appendChild(formArea);
+ 
+    return card;
+  }
+ 
+  function escapeHtml(str) {
+    return str.replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;").replace(/"/g,"&quot;");
+  }
+ 
+  function refreshCard(project) {
+    const container = document.getElementById("projects-container");
+    const old = document.getElementById("card-" + project.id);
+    const newCard = renderCard(project);
+    container.replaceChild(newCard, old);
+    bindCardEvents(project);
+  }
+ 
+  function bindCardEvents(project) {
+    const btn = document.getElementById("btn-" + project.id);
+    const input = document.getElementById("input-" + project.id);
+    const msg = document.getElementById("msg-" + project.id);
+ 
+    if (btn) {
+      btn.addEventListener("click", () => {
+        const name = input.value.trim();
+        if (!name) {
+          msg.className = "msg";
+          msg.textContent = "請輸入姓名";
+          return;
+        }
+        const list = loadData(project.id);
+        if (project.max !== null && list.length >= project.max) {
+          msg.className = "msg";
+          msg.textContent = "名額已滿，無法報名";
+          return;
+        }
+        if (list.includes(name)) {
+          msg.className = "msg";
+          msg.textContent = "此姓名已報名過了";
+          return;
+        }
+        list.push(name);
+        saveData(project.id, list);
+        refreshCard(project);
+        const newMsg = document.getElementById("msg-" + project.id);
+        if (newMsg) {
+          newMsg.className = "msg success";
+          newMsg.textContent = "報名成功！";
+        }
+      });
+ 
+      input && input.addEventListener("keydown", e => {
+        if (e.key === "Enter") btn.click();
+      });
+    }
+ 
+    // 移除按鈕
+    document.querySelectorAll(`[data-pid="${project.id}"]`).forEach(removeBtn => {
+      removeBtn.addEventListener("click", () => {
+        const idx = parseInt(removeBtn.dataset.idx);
+        const list = loadData(project.id);
+        list.splice(idx, 1);
+        saveData(project.id, list);
+        refreshCard(project);
+      });
+    });
+  }
+ 
+  function init() {
+    const container = document.getElementById("projects-container");
+    PROJECTS.forEach(project => {
+      container.appendChild(renderCard(project));
+      bindCardEvents(project);
+    });
+  }
+ 
+  init();
+</script>
+ 
+</body>
+</html>
