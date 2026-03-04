@@ -120,7 +120,7 @@
       margin: 40px auto;
       padding: 0 20px;
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(380px, 1fr));
+      grid-template-columns: repeat(auto-fit, minmax(min(380px, 100%), 1fr));
       gap: 28px;
     }
 
@@ -189,8 +189,6 @@
 
     .registrants-list {
       list-style: none;
-      <!-- max-height: 180px;
-      overflow-y: auto; -->
     }
 
     .registrants-list li {
