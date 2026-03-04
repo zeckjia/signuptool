@@ -489,7 +489,7 @@
         const li = document.createElement("li");
         li.innerHTML = `
           <span>${idx + 1}. ${escapeHtml(row.name)}</span>
-          <!-- <button class="remove-btn" title="移除" data-rowid="${row.id}" data-pid="${project.id}">✕</button> -->
+          <button class="remove-btn" title="移除" data-rowid="${row.id}" data-pid="${project.id}">✕</button>
         `;
         ul.appendChild(li);
       });
