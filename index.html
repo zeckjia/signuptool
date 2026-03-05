@@ -466,11 +466,11 @@
     if (isLimited) {
       const pct = Math.min((list.length / project.max) * 100, 100);
       spotsBar.innerHTML = `
-        <div class="spots-label">已报名 <strong>${list.length}</strong> / ${project.max} 人</div>
+        <div class="spots-label">Registered <strong>${list.length}</strong> / ${project.max} 人</div>
         <div class="progress-track"><div class="progress-fill" style="width:${pct}%"></div></div>
       `;
     } else {
-      spotsBar.innerHTML = `<div class="spots-label">已报名 <strong>${list.length}</strong> 人</div>`;
+      spotsBar.innerHTML = `<div class="spots-label">Registered <strong>${list.length}</strong> 人</div>`;
     }
     card.appendChild(spotsBar);
 
