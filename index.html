@@ -283,8 +283,8 @@
 
 <header id="site-header">
   <h1>Registration for MPNA English Reading Salon Facilitator Training</h1>
-  <div class="intro-box">请使用此链接报名参加英文读书会导读培训演练
-每场导读演练限4人，观摩人数无上限</div>
+  <div class="intro-box">Please use this page to register for the English Reading Salon Facilitator Training
+    Each session is limited to 4 pradtitioner trainees. No limit on the number of observers.</div>
 </header>
 
 <!-- 首页：日期列表 -->
@@ -310,21 +310,21 @@
     {
       id: "event-20260307",
       date: "Zoom Meeting ID: 2025050408  Password: 124590",
-      title: "美东时间：2026年3月7日 星期六 早晨 8:00 - 10:00",
-      description: "北京时间：2026年3月7日 星期六 晚上 21:00 - 23:00\nZoom Meeting ID: 2025050408  Password: 124590",
+      title: "Saturday, March 7, 2026, 8:00 - 10:00 AM EST",
+      description: "Saturday, March 7, 2026 9:00 - 11:00 PM UTC+8 (Beijing Time)\nZoom Meeting ID: 2025050408  Password: 124590",
       projects: [
-        { id: "event-20260307-p1", name: "导读演练", max: 4 },
-        { id: "event-20260307-p2", name: "观摩（扮演书友）", max: null }
+        { id: "event-20260307-p1", name: "Practitioner Trainees", max: 4 },
+        { id: "event-20260307-p2", name: "Observers（Reading salon participants）", max: null }
       ]
     },
     {
       id: "event-20260310",
       date: "Zoom Meeting ID: 2025050408  Password: 124590",
-      title: "美东时间：2026年3月10日 星期二 晚上 20:00 - 22:00",
-      description: "北京时间：2026年3月11日 星期三 早晨 8:00 - 10:00\nZoom Meeting ID: 2025050408  Password: 124590",
+      title: "Tuesday, March 10, 2026, 8:00 - 10:00 AM EDT",
+      description: "Wednesday, March 11, 2026, 8:00 - 10:00 AM UTC+8 (Beijing Time)\nZoom Meeting ID: 2025050408  Password: 124590",
       projects: [
-        { id: "event-20260310-p1", name: "导读演练", max: 4 },
-        { id: "event-20260310-p2", name: "观摩（扮演书友）", max: null }
+        { id: "event-20260310-p1", name: "Practitioner Trainees", max: 4 },
+        { id: "event-20260310-p2", name: "Observers（Reading salon participants）", max: null }
       ]
     }
   ];
@@ -338,7 +338,7 @@
         el = document.createElement("div");
         el.id = "loading-overlay";
         el.className = "loading-overlay";
-        el.textContent = "加载中…";
+        el.textContent = "Loading…";
         document.body.appendChild(el);
       }
     } else {
@@ -386,9 +386,9 @@
 
     const header = document.getElementById("site-header");
     header.innerHTML = `
-      <h1>北美英文读书会导读培训演练报名</h1>
-      <div class="intro-box">请使用此链接报名参加英文读书会导读培训演练
-每场导读演练限4人，观摩人数无上限</div>
+      <h1>Registration for MPNA English Reading Salon Facilitator Training</h1>
+      <div class="intro-box">Please use this page to register for the English Reading Salon Facilitator Training
+    Each session is limited to 4 pradtitioner trainees. No limit on the number of observers.</div>
     `;
 
     const container = document.getElementById("view-index");
@@ -427,7 +427,7 @@
 
     const header = document.getElementById("site-header");
     header.innerHTML = `
-      <button class="back-btn" id="back-btn">← 返回列表</button>
+      <button class="back-btn" id="back-btn">← Return to Session List</button>
       <h1>${ev.title}</h1>
       ${ev.description ? `<div class="intro-box">${escapeHtml(ev.description)}</div>` : ""}
     `;
@@ -456,8 +456,8 @@
     cardHeader.innerHTML = `
       <h2>${project.name}</h2>
       ${isLimited
-        ? `<span class="badge badge-limited">限额 ${project.max} 人</span>`
-        : `<span class="badge badge-open">开放报名・无上限</span>`}
+        ? `<span class="badge badge-limited">Limit ${project.max} Trainees</span>`
+        : `<span class="badge badge-open">Open・No Limit</span>`}
     `;
     card.appendChild(cardHeader);
 
@@ -476,18 +476,18 @@
 
     const section = document.createElement("div");
     section.className = "registrants-section";
-    section.innerHTML = `<h3>报名名单</h3>`;
+    section.innerHTML = `<h3>Registered</h3>`;
 
     const ul = document.createElement("ul");
     ul.className = "registrants-list";
     if (list.length === 0) {
-      ul.innerHTML = `<li class="empty-hint">暂无人报名</li>`;
+      ul.innerHTML = `<li class="empty-hint">No registers yet</li>`;
     } else {
       list.forEach((row, idx) => {
         const li = document.createElement("li");
         li.innerHTML = `
           <span>${idx + 1}. ${escapeHtml(row.name)}</span>
-          <button class="remove-btn" title="移除" data-rowid="${row.id}" data-pid="${project.id}">✕</button>
+          <button class="remove-btn" title="Remove" data-rowid="${row.id}" data-pid="${project.id}">✕</button>
         `;
         ul.appendChild(li);
       });
@@ -498,8 +498,8 @@
     const formArea = document.createElement("div");
     formArea.className = "form-area";
     formArea.innerHTML = `
-      <input type="text" placeholder="输入您的姓名" id="input-${project.id}" maxlength="30" ${full ? "disabled" : ""} />
-      <button id="btn-${project.id}" ${full ? "disabled" : ""}>${full ? "名额已满" : "确认报名"}</button>
+      <input type="text" placeholder="Please type your name" id="input-${project.id}" maxlength="30" ${full ? "disabled" : ""} />
+      <button id="btn-${project.id}" ${full ? "disabled" : ""}>${full ? "Spots full" : "Confirm Registration"}</button>
       <div class="msg" id="msg-${project.id}"></div>
     `;
     card.appendChild(formArea);
@@ -525,26 +525,26 @@
 
     btn.addEventListener("click", async () => {
       const name = input.value.trim();
-      if (!name) { msg.className = "msg"; msg.textContent = "请输入姓名"; return; }
+      if (!name) { msg.className = "msg"; msg.textContent = "Please type your name"; return; }
 
       btn.disabled = true;
       msg.className = "msg"; msg.textContent = "";
 
       const list = await fetchList(project.id);
       if (project.max !== null && list.length >= project.max) {
-        msg.textContent = "名额已满，无法报名"; btn.disabled = false; return;
+        msg.textContent = "Spots filled."; btn.disabled = false; return;
       }
       if (list.some(r => r.name === name)) {
-        msg.textContent = "此姓名已报名过了"; btn.disabled = false; return;
+        msg.textContent = "This name is already registered."; btn.disabled = false; return;
       }
 
       try {
         await addRegistration(project.id, name);
         await refreshCard(project);
         const newMsg = document.getElementById("msg-" + project.id);
-        if (newMsg) { newMsg.className = "msg success"; newMsg.textContent = "报名成功！"; }
+        if (newMsg) { newMsg.className = "msg success"; newMsg.textContent = "Registration recorded！"; }
       } catch(e) {
-        msg.textContent = "提交失败，请重试"; btn.disabled = false;
+        msg.textContent = "Failed, please retry."; btn.disabled = false;
       }
     });
 
@@ -557,7 +557,7 @@
           await deleteRegistration(rowId);
           await refreshCard(project);
         } catch(e) {
-          alert("删除失败，请重试");
+          alert("Failed to delete, please retry.");
         }
       });
     });
