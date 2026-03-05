@@ -401,7 +401,7 @@
       const badges = await Promise.all(ev.projects.map(async p => {
         const list = await fetchList(p.id);
         const maxTxt = p.max !== null ? `/ ${p.max}` : "";
-        return `<span class="mini-badge">${p.name}：${list.length}${maxTxt} 人</span>`;
+        return `<span class="mini-badge">${p.name}：${list.length}${maxTxt}</span>`;
       }));
 
       card.innerHTML = `
